@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>second.qml</file>
+        <file>first.qml</file>
+        <file>testJs.js</file>
     </qresource>
 </RCC>

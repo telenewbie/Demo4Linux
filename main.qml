@@ -31,4 +31,38 @@ ApplicationWindow {
             $SigDispatcher.msgQueueSend("hello world");
         }
     }
+
+    property var pageOne
+    function loadView (viewFile, data) {
+        var component = Qt.createComponent(viewFile)
+        if (component.status === Component.Ready) {
+           pageOne= component.createObject(applicationWindow,{viewData: data})
+        }
+        else
+            console.error("Error loading view:", component.errorString())
+    }
+
+    Button {
+        id:openTestJs
+        x: 10
+        y: 57
+        text: "openTestJs"
+        onClicked: {
+//            loadButton("qrc:/second.qml")
+            loadView("qrc:/second.qml",["a","2"])
+        }
+    }
+
+    Button {
+        id: button
+        x: 104
+        y: 57
+        text: qsTr("close")
+        onClicked: {
+            if (pageOne != null){
+                pageOne.destroy()
+            }
+        }
+    }
+
 }
