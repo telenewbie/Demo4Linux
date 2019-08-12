@@ -27,6 +27,9 @@ signals:
 public slots:
     void loadUrl();
     void msgQueueSend(const QString str);
+
+    void createReqSession(const QString str);
+    void printSessionId();
 private:
     //处理消息队列
     void startProcMsg();

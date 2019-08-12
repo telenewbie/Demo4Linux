@@ -1,6 +1,8 @@
 #include "ua4qml2.h"
 #include <iostream>
 
+#include "session/reqsession.h"
+
 UA4Qml2::UA4Qml2(QObject *parent) : QObject(parent)
 {
     m_request = new  CurlRequest;
@@ -30,6 +32,40 @@ void UA4Qml2::msgQueueSend(const QString str)
     msg.cmd = str.toStdString();
     msg.type = 1000;
     sendMsg(msg);
+}
+
+#include "session/session.h"
+void UA4Qml2::createReqSession(const QString str)
+{
+    //创建一个会话
+    //const char* conver to char*
+    std::string tmpStr = str.toStdString();
+    char* c_str=new char[tmpStr.length()];
+    memcpy(c_str,tmpStr.c_str(),tmpStr.length());
+
+    Session* session =new Session();
+    session->name = c_str;
+
+#if 1
+    //基本数据类型
+    ReqSessionTMP<char> reqSessionTmp1(c_str) ;
+    reqSessionTmp1.printSession();
+#endif
+
+#if 1
+    ReqSession reqSession(session) ;
+    //可以看到，没有调用析构函数
+    reqSession.printSession();
+#else
+    ReqSessionTMP<Session> reqSessionTmp(session) ;
+    //可以看到调用了析构函数
+    reqSessionTmp.printSession();
+#endif
+}
+
+void UA4Qml2::printSessionId()
+{
+
 }
 
 

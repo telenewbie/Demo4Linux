@@ -6,7 +6,9 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     ua4qml2.cpp \
-    curlrequest.cpp
+    curlrequest.cpp \
+    session/reqsession.cpp \
+    session/basereqsession.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,9 +37,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     ua4qml2.h \
     ua4qml.h \
-    curlrequest.h
+    curlrequest.h \
+    session/reqsession.h \
+    session/session.h \
+    session/basereqsession.h
 
-
+QMAKE_CXXFLAGS += -MMD
 
 LIBS += -lcurl
 

@@ -65,4 +65,15 @@ ApplicationWindow {
         }
     }
 
+    Button {
+        id: button1
+        x: 10
+        y: 103
+        text: qsTr("发起一次会话")
+        onClicked: {
+             $SigDispatcher.createReqSession("hello session");
+        }
+    }
+
+
 }
